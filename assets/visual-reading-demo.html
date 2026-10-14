@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Reading · 交互结构演示</title>
+<style>
+:root{--paper:#f5f3eb;--ink:#15261e;--green:#164b39;--line:#ccd9ce;--stage:#e7eee7}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+.progress{position:fixed;left:0;top:0;height:5px;width:0;background:var(--green);z-index:20}
+.top{position:fixed;z-index:10;left:0;right:0;top:5px;padding:18px 5vw;display:flex;justify-content:space-between;gap:20px;font-size:17px;color:#476354;pointer-events:none;background:linear-gradient(var(--paper),transparent)}
+.hero{min-height:100vh;padding:13vh 8vw;display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow,.outro .eyebrow{font-size:22px;letter-spacing:.13em;font-weight:800;color:#447a5d}
+.hero h1{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(60px,6vw,112px);max-width:1100px;line-height:1.2;margin:25px 0}
+.hero p{font-size:24px;color:#416c54}
+.story{display:grid;grid-template-columns:52% 48%;position:relative}
+.reading{grid-column:1;grid-row:1;position:relative;z-index:2}
+.step{min-height:100vh;padding:115px 5vw 80px;display:flex;align-items:center;border-top:1px solid #dce3dc}
+.step-content{max-width:780px;opacity:.48;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease}
+.step.active .step-content{opacity:1;transform:none}
+.mark{color:#367552;font-size:20px;font-weight:800;letter-spacing:.12em;margin-bottom:32px}
+.step p{font-size:clamp(38px,3.25vw,50px);font-weight:700;line-height:1.75;margin:0}
+.stage{grid-column:2;grid-row:1;position:sticky;top:0;height:100vh;align-self:start;overflow:hidden;background:var(--stage);border-left:1px solid var(--line)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:9vh 5vw;opacity:0;visibility:hidden;transition:none}
+.scene.active{opacity:1;visibility:visible;transition:opacity .22s ease}
+.scene .name{font-weight:800;letter-spacing:.15em;color:#497c60;font-size:21px}
+.art{flex:1;display:flex;flex-direction:column;justify-content:center}
+.figure{font-family:Georgia,serif;font-size:clamp(120px,14vw,260px);line-height:1;color:#95b4a0;font-weight:800}
+.figure.circle{width:240px;height:240px;border:18px solid #9abea4;border-radius:50%;font-size:0;box-shadow:0 0 0 28px #d1e1d3}
+.scene h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(42px,4.1vw,78px);color:var(--green);line-height:1.25;margin:14px 0}
+.scene .note{font-size:27px;color:#50745e;line-height:1.6}
+.bar-pair{display:flex;gap:25px;align-items:end;width:450px;height:240px}
+.bar-pair span{display:flex;align-items:end;justify-content:center;background:#a8c6ae;border-bottom:8px solid #2d6e4a;width:50%;height:75%;font-size:26px;padding-bottom:17px;font-weight:800;color:#184932}
+.bar-pair span+span{height:48%;background:#d8dec8}
+.scene .bottom{font-size:17px;border-top:1px solid #adc6b1;padding-top:22px;color:#52765d}
+.outro{min-height:100vh;padding:12vh 9vw;display:flex;flex-direction:column;justify-content:center}
+.outro h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(55px,5.2vw,95px);line-height:1.4;max-width:1200px}
+.outro p{font-size:20px;color:#52715d}
+@media(max-width:1000px){.story{display:flex;flex-direction:column}.stage{order:0;top:0;height:35vh;width:100%;border-left:0;border-bottom:2px solid var(--line);z-index:5}.reading{order:1}.step{min-height:65vh;padding:7vh 6vw}.step p{font-size:clamp(32px,4.4vw,42px)}.scene{padding:3vh 6vw}.scene h2{font-size:40px}.scene .note{font-size:20px}.scene .name,.scene .bottom,.figure,.figure.circle,.bar-pair{display:none}}
+@media(prefers-reduced-motion:reduce){.step-content,.scene{transition:none}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="top"><span>Visual Reading · Source + Interpretation</span><span>原创示例文字 · 非新闻报道</span></div>
+<header class="hero">
+<div class="eyebrow">INTERACTION DEMO / 交互演示</div>
+<h1>让阅读发生，<br>让解释跟随。</h1>
+<p>向下滚动 · 左侧阅读，右侧同步变化 ↓</p>
+</header>
+<main class="story">
+<article class="reading" aria-label="原创演示正文">
+<section class="step" data-scene="0"><div class="step-content"><div class="mark">01 / 先读到事实</div><p>教室里，一篇文章刚刚被打开。标题提出了一个问题，但答案还没有出现。</p></div></section>
+<section class="step" data-scene="0"><div class="step-content"><div class="mark">02 / 保持耐心</div><p>在形成判断之前，我们先把作者写下的证据读完，而不是让图像替我们作答。</p></div></section>
+<section class="step" data-scene="1"><div class="step-content"><div class="mark">03 / 证据与解释</div><p>即使两个人看到相同的现象，也可能因为经验不同，给它赋予不同的意义。</p></div></section>
+<section class="step" data-scene="1"><div class="step-content"><div class="mark">04 / 追问</div><p>于是，新的问题出现了：哪些内容来自观察，哪些已经属于作者的推论？</p></div></section>
+<section class="step" data-scene="2"><div class="step-content"><div class="mark">05 / 判断</div><p>一份材料可以支持有限的结论，却未必足以解释全部现实。证据的边界需要被说清。</p></div></section>
+<section class="step" data-scene="2"><div class="step-content"><div class="mark">06 / 继续阅读</div><p>这不是要求所有学生得到同一个答案，而是让每个人都能说出自己的理由。</p></div></section>
+</article>
+<aside class="stage" aria-label="同步视觉陪读">
+<div class="scene" id="scene-0"><div class="name">第一幕 / 阅读</div><div class="art"><div class="figure">“ ”</div><h2>先看作者<br>到底说了什么</h2><div class="note">标题不能替代正文。</div></div><div class="bottom">Source · 让文章自己说话</div></div>
+<div class="scene" id="scene-1"><div class="name">第二幕 / 区分</div><div class="art"><div class="bar-pair" aria-hidden="true"><span>观察</span><span>推论</span></div><h2>证据 ≠ 解释</h2><div class="note">右侧示意不是统计数据。</div></div><div class="bottom">Interpretation · 帮助辨认论证层次</div></div>
+<div class="scene" id="scene-2"><div class="name">第三幕 / 判断</div><div class="art"><div class="figure circle" aria-hidden="true"></div><h2>边界在哪里？</h2><div class="note">知道什么，也知道还不能确定什么。</div></div><div class="bottom">Question · 留给学生判断</div></div>
+</aside>
+</main>
+<footer class="outro"><div class="eyebrow">END / 回到阅读</div><h2>当视觉停下来，<br>你还记得原文吗？</h2><p>本文件仅展示交互机制，全部文字均为原创示意，不包含历史新闻文章正文。</p></footer>
+<script>
+(()=>{const steps=[...document.querySelectorAll('.step')],scenes=[...document.querySelectorAll('.scene')],bar=document.querySelector('.progress');let previous=-1,queued=false;function update(){queued=false;const edge=innerHeight*.48;let index=0;for(let i=0;i<steps.length;i++){if(steps[i].getBoundingClientRect().top<=edge)index=i;else break}if(index!==previous){if(previous>=0)steps[previous].classList.remove('active');steps[index].classList.add('active');const scene=+steps[index].dataset.scene;scenes.forEach((item,i)=>{const isActive=i===scene;item.classList.toggle('active',isActive);item.setAttribute('aria-hidden',String(!isActive))});previous=index}const limit=document.documentElement.scrollHeight-innerHeight;bar.style.width=(limit>0?scrollY/limit*100:0)+'%'}function schedule(){if(!queued){queued=true;requestAnimationFrame(update)}}addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);addEventListener('pageshow',schedule);update()})();
+</script>
+</body>
+</html>
